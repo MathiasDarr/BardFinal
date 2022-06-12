@@ -12,4 +12,6 @@ RUN npm i
 # add app
 COPY . ./
 # start app
+ENV REACT_APP_API_ENDPOINT /api/2/
+
 CMD ["npm", "start"]

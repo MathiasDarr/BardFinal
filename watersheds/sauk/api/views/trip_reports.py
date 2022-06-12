@@ -5,7 +5,7 @@ import logging
 api = Blueprint("trip_reports_api", __name__)
 log = logging.getLogger('werkzeug')
 
-@api.route('/bard', methods=['GET'])
+@api.route('/api/2/bard', methods=['GET'])
 def bard():
     log.info("dfad")
     return "adfa"

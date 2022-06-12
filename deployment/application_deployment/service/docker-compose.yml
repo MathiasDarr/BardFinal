@@ -1,0 +1,26 @@
+version: "3.2"
+
+services:
+  ui:
+    build:
+      context: bridgeburners/fiddler
+#    image: dakobedio/dakobed-ui:${DAKOBED_TAG:-latest}
+#    depends_on:
+#      - api
+    command: npm run start
+    ports:
+      - "127.0.0.1:3000:3000"
+    volumes:
+      - "./bridgeburners/fiddler/src:/app/src"
+
+  api:
+    build:
+      context: watersheds/sauk
+    #image: barddata/bard:${BARD_TAG:-latest}
+    #command: bard run -h 0.0.0.0 -p 5000 --with-threads --reload --debugger
+    #command: gunicorn --workers 2 --timeout 90 --bind 0.0.0:5000 --access-logfile - wsgi:application --reload
+    ports:
+      - "127.0.0.1:5000:5000"
+    restart: on-failure
+    volumes:
+      - "./watersheds/sauk/api:/usr/src/app/api"
