@@ -51,4 +51,6 @@ coverage.xml
 docs/_build/
 
 
+**/node_modules
+
 .idea/
