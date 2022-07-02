@@ -1,0 +1,7 @@
+FROM ubuntu:20.04
+ENV DEBIAN_FRONTEND noninteractive
+
+RUN apt-get -qq -y update && apt-get -qq -y install curl jq python3-pip
+RUN pip3 install ansible
+
+CMD tail -f /dev/null

@@ -1,0 +1,39 @@
+version: '3.4'
+services:
+  client:
+    build:
+      context: ./ansible_client
+    networks:
+      mynet:
+#        ipv4_address: 172.16.128.2
+    privileged: true
+#
+  server:
+    build:
+      context: ./server
+      args:
+        SSH_MASTER_USER: ${SSH_MASTER_USER}
+        SSH_MASTER_PASS: ${SSH_MASTER_PASS}
+    hostname: server
+    ports:
+      - "22-26:22"
+    scale: 1
+    networks:
+      mynet:
+#        ipv4_address: 172.16.128.3
+#
+#
+
+#  remote:
+#    build:
+#      context: .
+#    ports:
+#      - "2222:22"
+#    networks:
+#      mynet:
+#        ipv4_address: 172.16.128.3
+networks:
+  mynet:
+    ipam:
+      config:
+        - subnet: 172.16.128.0/24

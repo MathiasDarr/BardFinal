@@ -1,0 +1,19 @@
+version: '3'
+services:
+  server:
+    build:
+      context: ./docker
+      args:
+        SSH_MASTER_USER: ${SSH_MASTER_USER}
+        SSH_MASTER_PASS: ${SSH_MASTER_PASS}
+    hostname: server
+    ports:
+      - "2222:22"
+    networks:
+      mynet:
+        ipv4_address: 172.16.128.3
+networks:
+  mynet:
+    ipam:
+      config:
+        - subnet: 172.16.128.0/24
