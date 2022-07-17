@@ -10,12 +10,10 @@ env = core.Environment()
 if account and region:
     env = core.Environment(account=account, region=region)
 
-
 app = core.App()
 DeploymentStack(app,
                 "DakobedBardStack",
                 env=env
-
                 )
 
 app.synth()

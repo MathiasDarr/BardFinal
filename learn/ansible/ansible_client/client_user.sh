@@ -1,11 +1,13 @@
 #!/bin/bash
 set -e
 
-printf "\n\033[0;44m---> Creating SSH master user.\033[0m\n"
+#printf "\n\033[0;44m---> Creating SSH master user.\033[0m\n"
 
-useradd -m -d /home/user -G ssh user -s /bin/bash
-
-echo "user:user" | chpasswd
-echo 'PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin"' >> /home/user/.profile
-ssh-keygen -t ed25519 -f ~/.ssh/ansible -C "ansible"
+#useradd -m -d /home/workstation -G ssh workstation -s /bin/bash
+#echo "workstation:workstation" | chpasswd
+#echo 'PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin"' >> /home/workstation/.profile
+#mkdir /home/workstation/.ssh
+ssh-keygen -t ed25519 -f /home/workstation/.ssh/ansible -C "ansible"
+#adduser workstation sudo
+#sudo chown workstation ~/.ssh
 #ssh-keygen -t ed25519 -C "ansible"

@@ -12,8 +12,6 @@
 // import './App.scss'
 
 
-
-
 import './App.css';
 import Silly from './silly'
 function App() {
@@ -25,8 +23,6 @@ function App() {
 }
 
 export default App;
-
-
 
 
 // FocusStyleManager.onlyShowFocusOnTabs();
@@ -76,10 +72,6 @@ export default App;
 //     return Promise.reject(error)
 //   }
 // )
-
-
-
-
 // function App() {
 //   // extends blueprint icon renderer to render icons from the ftm iconRegistry
 
@@ -95,6 +87,4 @@ export default App;
 // }
 
 // export default App;
-
-
 
