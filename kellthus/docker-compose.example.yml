@@ -1,0 +1,64 @@
+version: '3.1'
+
+services:
+    nginx:
+        image: nginx:1.15
+        container_name: nginx
+        volumes:
+            - ./coltrane/:/var/www
+            - ./coltrane/conf/nginx-dev.conf:/etc/nginx/conf.d/default.conf
+        ports:
+            - 80:80
+        networks:
+            - my-network
+        depends_on:
+            - server
+            - client
+    client:
+        build:
+            context: coltrane/client
+            dockerfile: Dockerfile
+        container_name: client
+        command: npm start
+        volumes:
+            - ./coltrane/client:/usr/app
+            - /usr/app/node_modules
+        networks:
+            my-network:
+                aliases:
+                    - client
+#        command: npm start
+        stdin_open: true
+        ports:
+            - "3000:3000"
+    server:
+        build:
+          context: ./sauk
+        ports:
+          - "127.0.0.1:5000:5000"
+        container_name: server
+        volumes:
+          - "./sauk/api:/usr/src/app/api"
+        networks:
+            my-network:
+                aliases:
+                    - server
+#
+#    server:
+#        build:
+#            context: ../
+#            dockerfile: server/Dockerfile
+#        container_name: server
+#        command: gunicorn --bind 0.0.0.0:5000 --workers 4 --pythonpath /var/www/ "server.create_app:create_app(True)"
+#        volumes:
+#            - ../server:/var/www/server
+#        networks:
+#            my-network:
+#                aliases:
+#                    - server
+#        expose:
+#            - 5000
+#        ports:
+#            - "5000:5000"
+networks:
+    my-network:

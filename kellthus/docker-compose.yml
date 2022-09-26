@@ -1,0 +1,22 @@
+version: "3.2"
+
+services:
+  api:
+    build:
+      context: ./sauk
+    ports:
+      - "127.0.0.1:5000:5000"
+    environment:
+      FLASK_APP: "sauk.wsgi"
+    volumes:
+      - "./sauk/api:/usr/src/app/api"
+  ui:
+    build:
+      context: kellhus-ui
+    depends_on:
+      - api
+    command: npm run start
+    volumes:
+      - "./kellhus-ui/src:/app/src"
+    ports:
+      - "127.0.0.1:8080:8080"
